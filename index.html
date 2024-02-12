@@ -1,0 +1,39 @@
+<!-- HTML -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>グローバルメニュー生成フォーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <h1>グローバルメニュー生成フォーム</h1>
+  <div>
+    <details v-for="(menuItem, menuIndex) in menuList" class="details" :key="menuIndex">
+      <summary class="summary"><input tpye="text" class="menu-item-input"></summary>
+      <div class="details-inner">
+        <fieldset class="fieldset">
+          <label>URL:</label><input type="text" placeholder="https://example.com/" class="menu-url-input">
+        </fieldset>
+        <fieldset class="fieldset">
+          <label class="checkbox-label"><input type="checkbox">外部リンク</label>
+        </fieldset>
+      </div>
+    </details>
+  </div>
+    <hr>
+    <div class="generate">
+      <button class="button-add button-generate" id="submit-button" v-on:click.prevent="fileGenerate">設定ファイルを生成</button>
+    </div>
+  </form>
+  <div id="result" v-if="result">
+    <h2>設定ファイル</h2>
+    <p>※コピーして、フリーパーツ内にペーストしてください。</p>
+    <pre><code>{{ result }}</code></pre>
+  </div>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
