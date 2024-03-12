@@ -5,7 +5,7 @@
     padding: 0;
 }
 hr {
-    margin-bottom: 20px;
+    margin-block: 20px;
 }
 #app {
     max-width: 800px;
@@ -158,11 +158,33 @@ input[type="checkbox"] {
 }
 
 .details {
+    display: grid;
+    grid-template-rows: auto 0;
+    margin-top: 1rem;
     padding: .5rem 1rem;
-    box-shadow:0 0 2px rgba(0,0,0,0.15);
+    box-shadow:0 0 2px rgba(0,0,0,0.3);
+    transition: .3s ease-out;
 }
 .summary {
     display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .25em;
+}
+.summary::after {
+    content: '';
+    display: inline-block;
+    width: 1.5em;
+    height: .8em;
+    background-color: #ccc;
+    clip-path: polygon(0 0, 50% 50%, 100% 0,100% 50%, 50% 100%, 0 50%);
+    transition: .3s;
+}
+.details[open] {
+    grid-template-rows: auto auto;
+}
+.details[open] .summary::after {
+    transform: rotate(180deg);
 }
 .details-inner {
     padding-top: 1rem;

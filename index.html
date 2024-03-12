@@ -10,21 +10,23 @@
 <div id="app">
   <h1>グローバルメニュー生成フォーム</h1>
   <div>
-    <details v-for="(menuItem, menuIndex) in menuList" class="details" :key="menuIndex">
-      <summary class="summary"><input tpye="text" class="menu-item-input"></summary>
-      <div class="details-inner">
-        <fieldset class="fieldset">
-          <label>URL:</label><input type="text" placeholder="https://example.com/" class="menu-url-input">
-        </fieldset>
-        <fieldset class="fieldset">
-          <label class="checkbox-label"><input type="checkbox">外部リンク</label>
-        </fieldset>
-      </div>
-    </details>
+    <draggable v-for="(menuItem, menuIndex) in menuList"class="drag-area" :key="menuIndex">
+        <details class="details">
+          <summary class="summary"><input tpye="text" class="menu-item-input" v-model="menuItem.name"></summary>
+          <div class="details-inner">
+            <fieldset class="fieldset">
+              <label>URL:</label><input type="text" placeholder="https://example.com/" class="menu-url-input" v-model="menuItem.url">
+            </fieldset>
+            <fieldset class="fieldset">
+              <label class="checkbox-label"><input type="checkbox" v-model="menuIndex.isExternal">外部リンク</label>
+            </fieldset>
+          </div>
+        </details>
+    </draggable>
   </div>
     <hr>
     <div class="generate">
-      <button class="button-add button-generate" id="submit-button" v-on:click.prevent="fileGenerate">設定ファイルを生成</button>
+      <button class="button-add button-generate" id="submit-button" v-on:click.prevent="fileGenerate">HTMLを生成</button>
     </div>
   </form>
   <div id="result" v-if="result">
@@ -34,6 +36,7 @@
   </div>
 </div>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://unpkg.com/vuedraggable@next"></script>
 <script src="script.js"></script>
 </body>
 </html>
